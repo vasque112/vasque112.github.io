@@ -2,7 +2,7 @@ body {
   background: rgb(121, 122, 182);
   color: rgb(0, 0, 0);
   padding: 10px;
-  font-family: ;
+  font-family: "Courier New", Courier, monospace;
 }
 #all-contents {
   max-width: 800px;
@@ -50,7 +50,8 @@ main {
 }
 .sidebar-img {
   width: 250px;
-  border-radius: 10px;
+  border-radius: 25px;
+  border: 4px rgb(137, 140, 194) solid;
 }
 .content {
   flex: 1;
