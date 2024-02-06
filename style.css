@@ -70,3 +70,84 @@ h2,
 h3 {
   margin: 0px;
 }
+
+/* actual portfolio styles */
+.content h1 {
+  color: black;
+}
+
+#portfolio {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#portfolio li {
+  background: rgb(216, 219, 236);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 3px #fff;
+  border-style: outset;
+}
+
+#portfolio li:hover {
+  background: rgb(226, 227, 238);
+  border-style: inset;
+  border-color: rgb(203, 206, 233);
+}
+
+#portfolio a {
+  text-decoration: none;
+  color: #454545;
+}
+
+
+/* responsive web design */
+@media screen and (min-width: 120px) and (max-width: 1080px) {
+  main {
+    height: 100ch;
+    zoom: 1.25;
+    display: grid;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  #all-contents {
+    height: 100ch;
+    margin: none;
+  }
+
+  a {
+    font-size: 26px;
+  }
+
+  .sidebar {
+    margin-right: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar-img {
+    width: 100%;
+  }
+
+  p,
+  li {
+    font-size: 26px;
+  }
+
+  .content {
+    align-content: center;
+    justify-content: center;
+  }
+}
