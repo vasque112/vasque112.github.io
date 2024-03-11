@@ -8,7 +8,7 @@
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: teal;
+			background-color: rgb(255, 255, 255);
 			font-size: 300%;
 			text-align: center;
 			user-select: none;
@@ -19,6 +19,7 @@
 		}
 		.board{
 			height: 100vh;
+			background-image: url(https://tse1.mm.bing.net/th/id/OIP.Y3k1hv5nfLMxf_7ZtDdxmgHaHa?rs=1&pid=ImgDetMain);
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -48,13 +49,20 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
-				box.css("left", newPositionX);
-			}
+			function moveBoxTo(newPositionX, newPositionY) {
+      			box.css('left', newPositionX);
+      			box.css('top', newPositionY);
+  			}
 
 			// changes the text displayed on the Box
 			function changeBoxText(newText) {
 				box.text(newText);
+			}
+
+			// changes Box color
+
+			function getRandomColor(newColor) {
+				box.css('background-color', newColor);
 			}
 
 			//////////////////////////////////////////////////////////////////
@@ -64,8 +72,15 @@
 			// TODO 2 - Variable declarations 
 			
 			var positionX = 0;
+			var positionY = 10;
 			var points = 0;
 			var speed = 10;
+			var speedY = 10;
+			var boardHeight = jQuery(window).height();
+			var randNum = Math.random() * boardWidth;
+			var randNumY = Math.random() * boardHeight;
+			var colorStr = "purple";
+			var randomNumberBetween0and10 = Math.random() * 10;
 
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -74,12 +89,19 @@
 			*/
 			function update() {
 				positionX = positionX + speed;
-				moveBoxTo(positionX);
+				positionY = positionY + speedY;
+				moveBoxTo(positionX, positionY);
 				if (positionX>=boardWidth){
 					speed = speed * -1;
 				}
-				if (positionX<=0){
+				if (positionX<0){
 					speed = speed * -1;
+				}
+				if (positionY>=boardHeight){
+					speedY = speedY * -1;
+				}
+				if (positionY<0){
+					speedY = speedY * -1;
 				}
 			};
 
@@ -89,11 +111,23 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX = 0;
 				points = points + 1;
-				speed = speed + 3;
 				changeBoxText(points);
-
+				if(speed>0){
+					speed = speed + 3;
+				} else{
+					speed = speed - 3;
+				}
+				if(speedY>0){
+					speedY = speedY + 3;
+				} else{
+					speedY = speedY - 3;
+				}
+				randNum = Math.random() * boardWidth;
+				positionX = randNum;
+				randNumY = Math.random() * boardHeight;
+				PositionY = randNumY;
+				changeBoxColor(colorStr);
 			};
 		})();
 	</script>
