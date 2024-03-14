@@ -93,7 +93,8 @@
 			var randomNumber = Math.random() * 10;
 			var addSpeed = 3
 			var misclicks = 0
-			var actuallyMisclicked = 0
+			var actuallyMisclicked = 1
+			var gameFailed = 0
 
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -125,8 +126,10 @@
 			*/
 			function handleBoxClick() {
 				actuallyMisclicked = 0;
-				points = points + 1;
-				changeBoxText(points);
+				if(gameFailed===0){
+					points = points + 1;
+					changeBoxText(points);
+				}
 				if(points % 3 === 0){
 					addSpeed = addSpeed + 1
 				}
@@ -148,13 +151,21 @@
 			};
 
 			function handleBoardClick() {
-				misclicks = misclicks + 1
-				if (misclicks >= 10){
-					box.css('font-size', "200%");
-					points = points + "❌"
-					changeBoxText(points);
-					endGame()
+				if (actuallyMisclicked===1){
+					misclicks = misclicks + 1
+					if (misclicks >= 10){
+						box.css('font-size', "200%");
+						if (gameFailed===1){
+							// Nothing is here because we want to only add X's once
+						} else{
+							points = points + "❌"
+						}
+						changeBoxText(points);
+						gameFailed = 1
+						endGame()
+					}
 				}
+				actuallyMisclicked = 1;
 			}
 			
 		})();
