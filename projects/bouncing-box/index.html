@@ -58,12 +58,6 @@
           box.text(newText);
         }
 
-        // changes Box color
-
-        function getRandomColor() {
-          randomNumber = Math.random() * 255;
-        }
-
         // ends game
 
         function endGame() {
@@ -74,14 +68,16 @@
 
         board.on("click", handleBoardClick);
 
-        // handles changing box color
+        // changes box color
 
         function changeBoxColor() {
-          rColor = Math.random() * 255;
-          gColor = Math.random() * 255;
-          bColor = Math.random() * 255;
-          colorStr = "rgb(" + rColor + ", " + gColor + ", " + bColor + ")";
-          box.css("background-color", colorStr);
+          if (points % 3 === 0) {
+            rColor = Math.random() * 255;
+            gColor = Math.random() * 255;
+            bColor = Math.random() * 255;
+            colorStr = "rgb(" + rColor + ", " + gColor + ", " + bColor + ")";
+            box.css("background-color", colorStr);
+          }
         }
 
         //////////////////////////////////////////////////////////////////
@@ -99,7 +95,6 @@
         var randNum = Math.random() * boardWidth;
         var randNumY = Math.random() * boardHeight;
         var colorStr = "green";
-        var randomNumber = Math.random() * 10;
         var addSpeed = 3;
         var misclicks = 0;
         var actuallyMisclicked = 1;
@@ -139,12 +134,12 @@
 			the left side of the screen.
 			*/
         function handleBoxClick() {
-          changeBoxColor();
           actuallyMisclicked = 0;
           if (gameFailed === 0) {
             points = points + 1;
             changeBoxText(points);
           }
+		  changeBoxColor();
           if (points % 3 === 0) {
             addSpeed = addSpeed + 1;
           }
