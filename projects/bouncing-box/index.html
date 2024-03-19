@@ -16,6 +16,9 @@
         position: absolute;
         top: 100px;
         left: 910px; /* <--- Change me! */
+        border: 3px;
+        border-color: rgb(255, 0, 0);
+        border-style: solid;
       }
       .board {
         height: 100vh;
@@ -68,15 +71,47 @@
 
         board.on("click", handleBoardClick);
 
-        // changes box color
+        // changes box color values and sets colorstr to such
+
+        function changeBoxColorValues() {
+          rColor = Math.random() * 255;
+          gColor = Math.random() * 255;
+          bColor = Math.random() * 255;
+          colorStr = "rgb(" + rColor + ", " + gColor + ", " + bColor + ")";
+        }
+
+        // change border color
+
+        function changeBorderColor() {
+          if (rColor * 1.5 > 255) {
+            rColor = 255;
+          } else {
+            rColor = rColor * 1.25;
+          }
+
+          if (gColor * 1.5 > 255) {
+            gColor = 255;
+          } else {
+            gColor = gColor * 1.25;
+          }
+
+          if (bColor * 1.5 > 255) {
+            bColor = 255;
+          } else {
+            bColor = bColor * 1.25;
+          }
+
+          bordStr = "rgb(" + rColor + ", " + gColor + ", " + bColor + ")";
+        }
+
+        // changes all of the box's color values
 
         function changeBoxColor() {
           if (points % 3 === 0) {
-            rColor = Math.random() * 255;
-            gColor = Math.random() * 255;
-            bColor = Math.random() * 255;
-            colorStr = "rgb(" + rColor + ", " + gColor + ", " + bColor + ")";
+            changeBoxColorValues();
             box.css("background-color", colorStr);
+            changeBorderColor();
+            box.css("border-color", bordStr);
           }
         }
 
@@ -103,7 +138,14 @@
         var gColor = Math.random() * 255;
         var bColor = Math.random() * 255;
         var colorStr = "rgb(" + rColor + ", " + gColor + ", " + bColor + ")";
+        var bordStr;
+
+        // not variable declarations but I want them to still start
+
+        changeBoxColorValues();
         box.css("background-color", colorStr);
+        changeBorderColor();
+        box.css("border-color", bordStr);
 
         /* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -139,7 +181,7 @@
             points = points + 1;
             changeBoxText(points);
           }
-		  changeBoxColor();
+          changeBoxColor();
           if (points % 3 === 0) {
             addSpeed = addSpeed + 1;
           }
@@ -168,6 +210,7 @@
                 // Nothing is here because we want to only add X's once
               } else {
                 points = points + "❌";
+                box.css("border-style", "dotted");
               }
               changeBoxText(points);
               gameFailed = 1;
